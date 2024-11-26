@@ -1,8 +1,8 @@
 // foundations
-@import "foundations/variables";
-@import "foundations/functions";
-@import "foundations/mixins";
-@import "foundations/normalize";
+@use "foundations/normalize" as *;
+@use "foundations/variables" as *;
+@use "foundations/functions";
+@use "foundations/mixins" as *;
 
 body {
   padding: 1rem;
@@ -40,10 +40,10 @@ $colors: (
 );
 .dots {
   display: flex;
-  gap: rem(8px);
+  gap: functions.rem(8px);
   > div {
-    width: rem(16px);
-    height: rem(16px);
+    width: functions.rem(16px);
+    height: functions.rem(16px);
     border-radius: 100%;
     background: red;
     @each $color, $value in $colors {
@@ -56,7 +56,7 @@ $colors: (
 
 @for $i from 1 through 12 {
   .col-#{$i} {
-    width: col-width($i);
+    width: functions.col-width($i);
   }
 }
 
