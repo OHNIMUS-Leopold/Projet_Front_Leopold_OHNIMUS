@@ -1,5 +1,7 @@
+@use "functions";
+
 @mixin font-size($size, $line-height: "auto") {
-  font-size: rem($size);
+  font-size: functions.rem($size);
   @if $line-height != "auto" {
     line-height: $line-height;
   }
