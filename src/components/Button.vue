@@ -18,12 +18,6 @@ defineProps<{
 
 <style lang="scss">
 
-$primaryColor: #FF5722;
-$primaryDarkColor: #E64A19;
-$white: #FFFFFF;
-$gray100: #F5F5F5;
-$gray400: #BDBDBD;
-
 
 .button {
     background: $primaryColor;
