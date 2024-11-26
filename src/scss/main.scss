@@ -1,0 +1,72 @@
+// foundations
+@import "foundations/variables";
+@import "foundations/functions";
+@import "foundations/mixins";
+@import "foundations/normalize";
+
+body {
+  padding: 1rem;
+  font-family: $fontTextFamily;
+  @include font-size(16px, 1.5);
+  color: $gray400;
+
+  @include medium-up {
+    color: $gray800;
+  }
+}
+img {
+  max-width: 100%;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h1 {
+  + p {
+    color: $primaryColor;
+
+    @include medium-up {
+      color: $gray800;
+    }
+  }
+}
+$colors: (
+  "red": #f00,
+  "green": #0f0,
+  "blue": #00f,
+);
+.dots {
+  display: flex;
+  gap: rem(8px);
+  > div {
+    width: rem(16px);
+    height: rem(16px);
+    border-radius: 100%;
+    background: red;
+    @each $color, $value in $colors {
+      &.#{$color} {
+        background: $value;
+      }
+    }
+  }
+}
+
+@for $i from 1 through 12 {
+  .col-#{$i} {
+    width: col-width($i);
+  }
+}
+
+.c-listItem {
+  display: grid;
+  @include medium-up {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include large-up {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
