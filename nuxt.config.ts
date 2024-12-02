@@ -4,6 +4,8 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxt/eslint'],
 
+  css: ['@/scss/main.scss'],
+
   vite: {
     css: {
       preprocessorOptions: {
