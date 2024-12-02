@@ -1,5 +1,6 @@
 <template>
     <div>
-        Page d'accueil
+        <p>Page d'accueil</p>
+        <Button>test</Button>
     </div>
 </template>
