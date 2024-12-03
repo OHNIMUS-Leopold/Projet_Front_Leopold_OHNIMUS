@@ -1,3 +1,3 @@
 <template>
-    
+    <p>slug</p>
 </template>
