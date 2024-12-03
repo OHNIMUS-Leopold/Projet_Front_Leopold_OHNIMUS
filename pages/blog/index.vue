@@ -6,7 +6,7 @@ import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 const POSTS_QUERY = groq`*[
   _type == "post"
   && defined(slug.current)
-]|order(publishedAt desc)[0...12]{_id, title, slug, publishedAt, image}`;
+]|order(publishedAt desc)[0...12]{_id, title, slug, publishedAt, image, "categories": categories[]->{title, slug}}`;
 
 const { data: posts } = await useSanityQuery<SanityDocument[]>(POSTS_QUERY);
 
@@ -24,6 +24,14 @@ const urlFor = (source: SanityImageSource) =>
             <li v-for="(post, index) in posts" :key="index">
                 <NuxtLink :to="`/blog/${post.slug.current}`">{{ post.title }}</NuxtLink>
                 <img v-if="post.image" :src="urlFor(post.image)!.url()" alt="" style="height: 200px; width: 200px;">
+                <div v-if="post.categories">
+                    <h4>Catégories :</h4>
+                    <ul>
+                        <li v-for="category in post.categories" :key="category._id">
+                            {{ category.title }}
+                        </li>
+                    </ul>
+                </div>
             </li>
         </ul>
     </div>

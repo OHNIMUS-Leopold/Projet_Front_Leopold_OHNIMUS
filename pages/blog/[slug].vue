@@ -4,12 +4,7 @@ import type { SanityDocument } from "@sanity/client";
 // import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
 // Query GROQ pour sanity
-const POST_QUERY = groq`*[_type == "post" && slug.current == $slug][0]{
-    title,
-    image,
-    body,
-    categories[]->{title}
-}`;
+const POST_QUERY = groq`*[_type == "post" && slug.current == $slug][0]`;
 const route = useRoute();
 
 // Le paramètre de la route nuxt est envoyé dans la requête sanity
@@ -26,13 +21,5 @@ if (!post.value) {
         <h1>{{ post.title }}</h1>
         <SanityImage v-if="post.image" :asset-id="post.image.asset._ref" style="width: 200px; height: 200px;" />
         <SanityContent :blocks="post.body" />
-        <div v-if="post.categories">
-            <h2>Catégories</h2>
-            <ul>
-                <li v-for="category in post.categories" :key="category._id">
-                    {{ category.title }}
-                </li>
-            </ul>
-        </div>
     </div>
 </template>
