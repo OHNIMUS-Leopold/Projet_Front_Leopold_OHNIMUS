@@ -2,13 +2,18 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
-  modules: ['@nuxt/eslint'],
+  modules: ['@nuxt/eslint', '@nuxtjs/sanity'],
 
   css: ['@/scss/main.scss'],
 
   components: [
     { path: '@/components', pathPrefix: false },
   ],
+
+  sanity: {
+    projectId: "4nwfupzt",
+    dataset: "production",
+  },
 
   vite: {
     css: {
