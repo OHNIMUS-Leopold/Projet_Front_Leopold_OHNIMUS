@@ -19,7 +19,7 @@ if (!post.value) {
 <template>
     <div v-if="post">
         <h1>{{ post.title }}</h1>
-        <SanityImage :asset-id="post.image.asset._ref" style="width: 200px; height: 200px;" />
+        <SanityImage v-if="post.image" :asset-id="post.image.asset._ref" style="width: 200px; height: 200px;" />
         <SanityContent :blocks="post.body" />
     </div>
 </template>

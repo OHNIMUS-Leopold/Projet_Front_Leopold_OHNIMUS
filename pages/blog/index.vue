@@ -23,7 +23,7 @@ const urlFor = (source: SanityImageSource) =>
         <ul>
             <li v-for="(post, index) in posts" :key="index">
                 <NuxtLink :to="`/blog/${post.slug.current}`">{{ post.title }}</NuxtLink>
-                <img :src="urlFor(post.image)!.url()" alt="">
+                <img v-if="post.image" :src="urlFor(post.image)!.url()" alt="" style="height: 200px; width: 200px;">
             </li>
         </ul>
     </div>
