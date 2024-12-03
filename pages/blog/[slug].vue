@@ -10,7 +10,9 @@ const route = useRoute();
 // Le paramètre de la route nuxt est envoyé dans la requête sanity
 const { data: post } = await useSanityQuery<SanityDocument>(POST_QUERY, {slug: route.params.slug});
 
-
+if (!post.value) {
+    throw createError({ statusCode: 404, message: "Post not found" });
+}
 
 </script>
 
