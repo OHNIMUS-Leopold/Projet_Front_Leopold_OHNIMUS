@@ -3,6 +3,14 @@ import type { SanityDocument } from "@sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
+useSeoMeta({
+    title: 'Blog | Tracking App',
+    description: 'Retrouvez nos notes de mises à jour et nos dernières actualités concernant Tracking App !',
+    ogTitle: 'Titre opengraph',
+    ogDescription: 'Description opengraph',
+    ogImage: ''
+})
+
 const filter = ref('')
 const page = ref(1)
 const perPage = 2
