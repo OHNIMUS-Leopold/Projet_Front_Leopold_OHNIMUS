@@ -32,8 +32,18 @@ const POSTS_QUERY = groq`*[
 ]|order(publishedAt desc)[$start...$end]{_id, title, slug, publishedAt, image, "categories": categories[]->{title, slug}}`;
 
 const { data: posts } = await useSanityQuery<SanityDocument[]>(POSTS_QUERY, { filter: filter, start: paginationStart, end: paginationEnd });
+    const TOTAL_POSTS_QUERY = groq`count(*[
+  _type == "post"
+  && defined(slug.current)
+  && ($filter == '' || $filter in (categories[]->slug.current))
+])`;
+
+const { data: totalPosts } = await useSanityQuery<number>(TOTAL_POSTS_QUERY, { filter: filter.value });
+
+const nbMaxPage = computed(() => Math.ceil((totalPosts.value || 0) / perPage));
 
 function onCategoryClick (category: SanityDocument) {
+    page.value = 1
     filter.value = category.slug.current
 }
 
@@ -55,7 +65,7 @@ const urlFor = (source: SanityImageSource) =>
             </div>
         </div>
 
-        <div class="p-blog__list">
+        <div v-if="posts && posts.length" class="p-blog__list">
             <div v-for="(post, index) in posts" :key="index" class="p-blog__item">
                 
                 <NuxtLink :to="`/blog/${post.slug.current}`">
@@ -76,10 +86,14 @@ const urlFor = (source: SanityImageSource) =>
                 </div>
             </div>
         </div>
+        <div v-else>
+            <h3>Il n'y a pas de posts à afficher</h3>
+        </div>
+
         On affiche la page : {{ page }}
 
         <div class="p-blog__pagination">
-            <div v-for="n in 5" :key="n" class="p-blog__page" @click="onPageClick(n)">Page {{n}}</div>
+            <div v-for="n in nbMaxPage" :key="n" class="p-blog__page" @click="onPageClick(n)">Page {{n}}</div>
         </div>
     </div>
 </template>
@@ -99,7 +113,7 @@ const urlFor = (source: SanityImageSource) =>
 
     &__list {
         display: grid;
-        grid-template-columns: repeat(4, 1fr); 
+        grid-template-columns: repeat(2, 1fr); 
         gap: 16px; 
     }
 
