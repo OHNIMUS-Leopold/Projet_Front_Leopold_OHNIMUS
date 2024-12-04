@@ -4,6 +4,20 @@ import imageUrlBuilder from "@sanity/image-url";
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
 const filter = ref('')
+const page = ref(1)
+const perPage = 2
+
+function onPageClick (index : number) {
+    page.value = index
+}
+
+const paginationStart = computed(() => {
+    return (page.value - 1) * perPage
+})
+
+const paginationEnd = computed(() => {
+    return page.value * perPage
+})
 
 const CATEGORIES_QUERY = groq`*[
   _type == "category"
@@ -15,9 +29,9 @@ const POSTS_QUERY = groq`*[
   _type == "post"
   && defined(slug.current)
   && ($filter == '' || $filter in (categories[]->slug.current))
-]|order(publishedAt desc)[0...12]{_id, title, slug, publishedAt, image, "categories": categories[]->{title, slug}}`;
+]|order(publishedAt desc)[$start...$end]{_id, title, slug, publishedAt, image, "categories": categories[]->{title, slug}}`;
 
-const { data: posts } = await useSanityQuery<SanityDocument[]>(POSTS_QUERY, { filter });
+const { data: posts } = await useSanityQuery<SanityDocument[]>(POSTS_QUERY, { filter: filter, start: paginationStart, end: paginationEnd });
 
 function onCategoryClick (category: SanityDocument) {
     filter.value = category.slug.current
@@ -61,6 +75,11 @@ const urlFor = (source: SanityImageSource) =>
                     </ul>
                 </div>
             </div>
+        </div>
+        On affiche la page : {{ page }}
+
+        <div class="p-blog__pagination">
+            <div v-for="n in 5" :key="n" class="p-blog__page" @click="onPageClick(n)">Page {{n}}</div>
         </div>
     </div>
 </template>
