@@ -44,7 +44,11 @@ const nbMaxPage = computed(() => Math.ceil((totalPosts.value || 0) / perPage));
 
 function onCategoryClick (category: SanityDocument) {
     page.value = 1
-    filter.value = category.slug.current
+    if (filter.value === category.slug.current) {
+        filter.value = ''
+    } else {
+        filter.value = category.slug.current
+    }
 }
 
 const { projectId, dataset } = useSanity().client.config();
