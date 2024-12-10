@@ -37,7 +37,7 @@ async function onSubmit(event: Event) {
 
         router.push('/app/dashboard');
     } catch (error) {
-        console.error('Erreur:', error);
+        console.log('Erreur:', error);
     }
 }
 </script>

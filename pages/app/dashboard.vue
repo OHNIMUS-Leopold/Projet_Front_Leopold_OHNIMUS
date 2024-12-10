@@ -34,7 +34,7 @@ async function deletePersonalHabit(habitId: string) {
 
         await refreshDashboard();
     } catch (error) {
-        console.error('Erreur:', error);
+        console.log('Erreur:', error);
     }
 }
 

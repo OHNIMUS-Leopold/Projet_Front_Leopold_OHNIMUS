@@ -29,7 +29,7 @@ async function updateHabit(event: Event) {
 
         await props.refreshDashboard();
     } catch (error) {
-        console.error("Erreur:", error);
+        console.log("Erreur:", error);
     }
 }
 </script>
