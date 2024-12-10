@@ -35,7 +35,7 @@ async function onSubmit(event: Event) {
 
         console.log('Utilisateur connecté avec succès:', data);
 
-        router.push('/');
+        router.push('/app/dashboard');
     } catch (error) {
         console.error('Erreur:', error);
     }
