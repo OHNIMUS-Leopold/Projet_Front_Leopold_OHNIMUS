@@ -47,11 +47,11 @@ async function onSubmit(event: Event) {
         <form @submit="onSubmit">
             <div>
                 <label for="username">Username</label>
-                <input v-model="username" type="text" id="username">
+                <input id="username" v-model="username" type="text">
             </div>
             <div>
                 <label for="password">Password</label>
-                <input v-model="password" type="password" id="password">
+                <input id="password" v-model="password" type="password">
             </div>
             <div>
                 <button type="submit">{{ btnText }}</button>

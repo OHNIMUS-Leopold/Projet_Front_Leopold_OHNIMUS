@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { SanityDocument } from "@sanity/client";
+// import type { SanityDocument } from "@sanity/client";
 
 const {urlFor} = useSanityImage()
 
