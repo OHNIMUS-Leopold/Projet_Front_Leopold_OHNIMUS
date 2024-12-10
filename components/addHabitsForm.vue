@@ -43,11 +43,11 @@ async function addPersonalHabit(event: Event) {
         <form @submit="addPersonalHabit">
             <div>
                 <label for="title">Titre</label>
-                <input id="title" v-model="newHabit.title" type="text" />
+                <input id="title" v-model="newHabit.title" type="text" >
             </div>
             <div>
                 <label for="description">Description</label>
-                <input id="description" v-model="newHabit.description" type="text" />
+                <input id="description" v-model="newHabit.description" type="text" >
             </div>
             <button type="submit">Ajouter une habitude personnelle</button>
         </form>

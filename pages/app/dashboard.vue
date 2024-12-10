@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-const { data: data, refresh: refreshDashboard, error } = useAsyncData('dashboard', async () => {
+const { data: data, refresh: refreshDashboard } = useAsyncData('dashboard', async () => {
     const response = await fetch('http://localhost:4000/dashboard', {
         method: 'GET',
         headers: {
@@ -37,6 +37,16 @@ async function deletePersonalHabit(habitId: string) {
         console.error('Erreur:', error);
     }
 }
+
+const habitToUpdate = ref<{ 
+    id: string; 
+    title: string; 
+    description: string
+} | null>(null);
+
+function closeUpdateForm() {
+    habitToUpdate.value = null;
+}
 </script>
 
 <template>
@@ -55,11 +65,18 @@ async function deletePersonalHabit(habitId: string) {
         <ul>
             <li v-for="(habit, index) in data.personalHabits" :key="index">
                 {{ habit.title }} : {{ habit.description }}
-                <button @click="deletePersonalHabit(habit.id)">Supprimer</button>
+                <button @click="deletePersonalHabit(habit.id)">DELETE</button>
+                <button @click="habitToUpdate = habit">UPDATE</button>
             </li>
         </ul>
 
-        <AddHabitsForm :refreshDashboard="refreshDashboard" />
+        <div v-if="habitToUpdate">
+            <h3>Modifier l'habitude</h3>
+            <UpdateHabitForm :habit="habitToUpdate" :refresh-dashboard="refreshDashboard" @submit.prevent="closeUpdateForm" />
+            <button @click="closeUpdateForm">Annuler</button>
+        </div>
+
+        <AddHabitsForm :refresh-dashboard="refreshDashboard" />
 
     </div>
 </template>
