@@ -19,7 +19,7 @@ defineProps<{
 
 <style lang="scss">
 
-
+/*
 .button {
     background: $primaryColor;
     color: $white;
@@ -59,5 +59,5 @@ defineProps<{
     &.-small {
         padding: 8px 16px;
     }
-}
+}*/
 </style>

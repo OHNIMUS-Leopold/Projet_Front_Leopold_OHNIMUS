@@ -1,7 +1,13 @@
 <script setup lang="ts">
 import type { SanityDocument } from "@sanity/client";
-import imageUrlBuilder from "@sanity/image-url";
-import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
+
+useSeoMeta({
+    title: 'Blog | Tracking App',
+    description: 'Retrouvez nos notes de mises à jour et nos dernières actualités concernant Tracking App !',
+    ogTitle: 'Titre opengraph',
+    ogDescription: 'Description opengraph',
+    ogImage: ''
+})
 
 const filter = ref('')
 const page = ref(1)
@@ -44,14 +50,14 @@ const nbMaxPage = computed(() => Math.ceil((totalPosts.value || 0) / perPage));
 
 function onCategoryClick (category: SanityDocument) {
     page.value = 1
-    filter.value = category.slug.current
+    if (filter.value === category.slug.current) {
+        filter.value = ''
+    } else {
+        filter.value = category.slug.current
+    }
 }
 
-const { projectId, dataset } = useSanity().client.config();
-const urlFor = (source: SanityImageSource) =>
-  projectId && dataset
-    ? imageUrlBuilder({ projectId, dataset }).image(source)
-    : null;
+const {urlFor} = useSanityImage()
 </script>
 
 <template>
