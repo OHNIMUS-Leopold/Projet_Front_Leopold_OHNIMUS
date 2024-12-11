@@ -10,6 +10,10 @@ export default defineNuxtConfig({
     { path: '@/components', pathPrefix: false },
   ],
 
+  // imports: {
+  //   dirs: ['utils/**']
+  // },
+
   sanity: {
     projectId: "4nwfupzt",
     dataset: "production",
@@ -17,7 +21,7 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      apiTrackingBaseUrl: '',
+      apiTrackingBaseUrl: process.env.NUXT_PUBLIC_API_TRACKING_BASE_URL || '',
     },
   },
 
@@ -25,6 +29,7 @@ export default defineNuxtConfig({
     css: {
       preprocessorOptions: {
         scss: {
+          api: 'modern-compiler',
           additionalData: `
             @use "@/scss/foundations/variables" as *;
             @use "@/scss/foundations/functions" as *;
