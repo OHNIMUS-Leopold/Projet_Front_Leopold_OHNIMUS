@@ -2,22 +2,22 @@
 </script>
 
 <template>
-    <header>
-        <nav>
-            <NuxtLink to="/">home</NuxtLink>
-            <NuxtLink to="/about">about</NuxtLink>
-            <NuxtLink to="/blog">blog</NuxtLink>
-            <NuxtLink to="/login">
-                <Button class=" -outline">
+    <header class="header">
+        <nav class="header__nav">
+            <NuxtLink to="/" class="header__nav-link">home</NuxtLink>
+            <NuxtLink to="/about" class="header__nav-link">about</NuxtLink>
+            <NuxtLink to="/blog" class="header__nav-link">blog</NuxtLink>
+            <NuxtLink to="/login" class="header__nav-link">
+                <Button class="button -outline">
                     Login
                 </Button>
             </NuxtLink>
-            <NuxtLink to="/register">
-                <Button class="-primary">
+            <NuxtLink to="/register" class="header__nav-link">
+                <Button class="button -primary">
                     Register
                 </Button>
             </NuxtLink>
-            <!-- <NuxtLink to="/app/dashboard">dashboard</NuxtLink> -->
+            <!-- <NuxtLink to="/app/dashboard" class="header__nav-link">dashboard</NuxtLink> -->
         </nav>
     </header>
 </template>
