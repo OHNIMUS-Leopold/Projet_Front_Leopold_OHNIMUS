@@ -35,6 +35,7 @@
     justify-content: space-between;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     position: sticky;
+    z-index: 10;
     top: 0;
     left: 0;
     right: 0;
