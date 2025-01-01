@@ -33,6 +33,7 @@
     padding: 16px;
     background-color: $white;
     justify-content: space-between;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
     &__nav {
         display: flex;
@@ -53,6 +54,7 @@
         font-size: 16px;
 
         &.-title {
+            color: $primaryColor;
             font-size: 24px;
             font-weight: bold;
             padding-right: 48px;
