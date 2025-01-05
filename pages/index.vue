@@ -32,7 +32,7 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(HOMEPAGE_QUERY);
 <template>
     <div>
         <div v-if="homepage">
-            <p>{{ homepage.title }}</p>
+            <!-- <p>{{ homepage.title }}</p> -->
 
             <Hero :hero="homepage.hero" />
 
